@@ -1,0 +1,38 @@
+@baseUrl = http://127.0.0.1:5085
+@systemPassword = 11111111-2222-4333-8444-555555555555
+@adminSession = REPLACE_WITH_ADMIN_SESSION
+@accountId = 1
+@userSession = REPLACE_WITH_USER_SESSION
+
+### 1. Create admin session; copy returned GUID into adminSession.
+POST {{baseUrl}}/api/session/create-admin?systemPassword={{systemPassword}}
+
+### 2. Create account; copy returned number into accountId.
+POST {{baseUrl}}/api/account/create
+Content-Type: application/json
+
+{"sessionKey":"{{adminSession}}","pinCode":1234}
+
+### 3. Create user session; copy returned GUID into userSession.
+POST {{baseUrl}}/api/session/create-user
+Content-Type: application/json
+
+{"accountId":{{accountId}},"pinCode":1234}
+
+### 4. Deposit: expected balance 1000 on a new account.
+POST {{baseUrl}}/api/account/put-money
+Content-Type: application/json
+
+{"sessionKey":"{{userSession}}","money":1000}
+
+### 5. Withdraw: expected balance 750.
+POST {{baseUrl}}/api/account/withdraw
+Content-Type: application/json
+
+{"sessionKey":"{{userSession}}","money":250}
+
+### 6. Balance: 750.
+GET {{baseUrl}}/api/account/get-balance?sessionKey={{userSession}}
+
+### 7. History includes Create, PutMoney, Withdraw, GetBalance.
+GET {{baseUrl}}/api/operation/get-history?sessionKey={{userSession}}

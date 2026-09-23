@@ -1,0 +1,10 @@
+<Solution>
+  <Project Path="src/Lab5.Application.Abstractions/Lab5.Application.Abstractions.csproj" />
+  <Project Path="src/Lab5.Application.Contracts/Lab5.Application.Contracts.csproj" />
+  <Project Path="src/Lab5.Application/Lab5.Application.csproj" />
+  <Project Path="src/Lab5.Domain/Lab5.Domain.csproj" />
+  <Project Path="src/Lab5.Infrastructure/Lab5.Infrastructure.csproj" />
+  <Project Path="src/Lab5.Presentation.Http/Lab5.Presentation.Http.csproj" />
+  <Project Path="src/Lab5/Lab5.csproj" />
+  <Project Path="tests/Lab5.Tests/Lab5.Tests.csproj" />
+</Solution>
